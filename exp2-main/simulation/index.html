@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOLVE</title>
+    <!--this is for the sin wave -->
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!---->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/query.css" />
+
+    <!--dot css-->
+    <!-- <link rel="stylesheet" href="./css/cktconnection_znr_line.css"> -->
+    <link rel="stylesheet" href="./css/cktconnection_znr_load.css">
+
+    <script
+      defer
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://code.jquery.com/ui/1.8.17/jquery-ui.min.js"
+    ></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script
+      defer
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"
+    ></script>
+
+    <script defer src="js/script.js"></script>
+
+    <style>
+      /* Add some basic CSS for styling */
+      #results-table {
+          width: 80%;
+          margin: 20px auto;
+          border-collapse: collapse;
+      }
+      #results-table th, #results-table td {
+          border: 5px solid #ada2d4;
+          padding: 8px;
+          text-align: center;
+      }
+      
+  </style>
+
+
+<!--css for the ckt_values-->
+<style>
+  #whole_body{
+    position: relative;
+    margin-left: auto;
+    top: 0px;
+    margin-right: auto;
+    height: 390px;
+    width: 100%;
+    }
+
+    #ckt_values1{
+      position: relative;
+      top:5px;
+      right: 0px;
+      left:370px;
+      height: 0px;
+      width: 49%
+    }
+</style>
+
+  </head>
+  <body onload="startsim();varinit();
+">
+    <div class="title-div-container">
+      <div class="title-div">
+        <div class="logo-div">
+          <a href="#"><img src="images/nitk.svg" alt="Logo" class="logo" /></a>
+        </div>
+        <h1>Class A Power Amplifier</h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <ul class="tool-menu">
+          <li class="tool-list">
+            <a href="#simulation" class="tool-link" title="Simulation"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="icons"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 8.25V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18V8.25m-18 0V6a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6zM7.5 6h.008v.008H7.5V6zm2.25 0h.008v.008H9.75V6z"
+                />
+              </svg>
+              <span>Simulation</span></a
+            >
+          </li>
+          <li class="tool-list">
+            <a href="#variables" class="tool-link" title="Variables"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="icons"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09"
+                />
+              </svg>
+              <span>Variables</span></a
+            >
+          </li>
+          <li class="tool-list">
+            <a href="#comments" class="tool-link" title="Comments"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="icons"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Results</span></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main">
+        <div class="main-section">
+          <div id="simulation" class="main__task-div">
+            <div class="title-control-div">
+              <h3 class="task-title">Simulation</h3>
+              <!--<div id="controls" class="div__control">
+                <img id="playpausebutton" onclick="simstate()" src="./images/blueplaydull.svg" alt="" />
+                <img id="graphbutton" onclick="plotgraph()" src="./images/graphbutton.svg" alt="" />
+
+    
+                
+              </div>-->
+            </div>
+            
+            <div class="canvas__div">
+
+              <!--div with the image and dit-->
+
+              <div id="whole_body">
+       
+                <div id="ckt_values1">
+                  <img src="./images/hartley.jpeg"  class="main-img">
+                  <div class="jtk-demo-canvas canvas-wide animation-demo jtk-surface jtk-surface-nopan" id="canvas">
+                    <div class="littledot" id="ld1"></br><a href="#" class="cmdLink detach" rel="ld1">1</a></div>
+        
+                    <div class="littledot" id="ld3"></br><a href="#" class="cmdLink detach" rel="ld3">3</a></div>
+                    <div class="littledot" id="ld4"></br><a href="#" class="cmdLink detach" rel="ld4">4</a></div>
+                    <div class="littledot" id="ld5"></br><a href="#" class="cmdLink detach" rel="ld5">5</a></div>
+                  </div>
+                </div>
+                  <button id="check-button" 
+                    style="position:absolute; top:320px; width:120px; right:200px;cursor:pointer;  ">Check connection</button>
+                  <button id="delete-connct" onclick="deleteconnection()"
+                    style="position:absolute; top:320px; width:100px; right:80px;cursor:pointer; ">Delete all connection</button>
+
+              </div>
+                <!--<img src="./images/circuit1.jpeg" style="width:400px;height:200px;position:relative;z-index: 0;" />
+    <div class="jtk-demo-canvas canvas-wide animation-demo jtk-surface jtk-surface-nopan" id="canvas">
+        <div class="littledot" id="ld1"></br><a href="#" class="cmdLink detach" rel="ld1">1</a>
+        </div>
+        
+        <div class="littledot" id="ld3"></br><a href="#" class="cmdLink detach" rel="ld3">3</a></div>
+        <div class="littledot" id="ld4"></br><a href="#" class="cmdLink detach" rel="ld4">4</a></div>
+        <div class="littledot" id="ld5"></br><a href="#" class="cmdLink detach" rel="ld5">5</a></div>
+        
+    
+    </div>-->
+    <script src="./js/jsplumb1.js"></script>
+
+<!--check delete buttons -->
+    
+            <!--<script type="text/javascript" src="./js/znrlo.js"></script>-->
+    <script src="./js/cktconnection_znr_load.js"></script>
+    
+
+              <div class="graph-div display-hide">
+                <canvas id="graphscreen1" class="canvas"></canvas>
+              </div>
+              <div class="graph-div display-hide">
+                <canvas id="graphscreen2" class="canvas"></canvas>
+              </div>
+            </div>
+          </div>
+          <div id="variables" class="main__task-div">
+            <div class="settings-sections">
+              <h3 class="task-title">Variables</h3>
+                <div class="variables-sections">
+
+                  <div class="var-div">
+                    <!-- Input Voltage field -->
+                    <label for="capacitor"> Capacitor C (uF):</label>
+                      <input style="width:100%;" type="number" id="capacitor" value="10">
+                      <input id="range" type="range" step="1" value="20" min="1" max="165">
+                      <br>
+                    <label for="l1"> Inductor L1 (mV):</label>
+                      <input style="width:100%;" type="number" id="l1" value="10">
+                      <input id="range1" type="range" step="1" value="20" min="1" max="165">
+                      <br>
+                    <label for="l2"> Inductor L2 (mV):</label>
+                      <input style="width:100%;" type="number" id="l2" value="10">
+                      <input id="range2" type="range" step="1" value="20" min="1" max="165">
+                      <br>
+                      <button style="width:50%;" onclick="calculateFrequency()">Calculate Frequency</button>
+                      <br>
+                      <p> Frequency(f): <span id = "Frequency"> </span>
+                      </p>
+                  </div>
+
+                <script>
+                // Script for slider
+
+                  const
+                    range = document.getElementById('range'),
+                    tooltip = document.getElementById('capacitor');
+                    range.addEventListener("input", ()=>{
+                      tooltip.value = range.value;
+
+                    })
+
+                    const
+                    range1 = document.getElementById('range1'),
+                    tooltips = document.getElementById('l1');
+                    range1.addEventListener("input", ()=>{
+                      tooltips.value = range1.value;
+
+                    })
+
+                    const
+                    range2 = document.getElementById('range2'),
+                    tooltiper = document.getElementById('l2');
+                    range2.addEventListener("input", ()=>{
+                      tooltiper.value = range2.value;
+
+                    })
+            // document.documentElement.style.setProperty("--range-progress", `calc(${newValue}% + (${newPosition}px))`);
+
+                </script>
+                
+          
+                <script>
+                  function calculateFrequency() {
+                    // Get the values of the inductor and capacitors
+                    const C = parseFloat(document.getElementById('capacitor').value);
+                    const l1 = parseFloat(document.getElementById('l1').value);
+                    const l2 = parseFloat(document.getElementById('l2').value);
+  
+                    // Calculate the total capacitance
+                    const lt = (l1 + l2);
+  
+                    // Calculate the frequency
+                    const Frequency = 1 / (2 * Math.PI * Math.sqrt(lt * C));
+  
+                    // Display the frequency 
+                    document.getElementById('Frequency').textContent = Frequency.toFixed(6) + "Hz";
+  
+                  }
+  
+                </script>
+
+
+<!--sin wave generation script-->
+
+<script>
+  function generateSineWave() {
+    const amplitude = 1;
+    const frequency = parseFloat(document.getElementById("frequency").value);
+
+    const x = [];
+    const y = [];
+
+    for (let t = 0; t < 2 * Math.PI; t += 0.01) {
+      x.push(t);
+      y.push(amplitude * Math.sin(2 * Math.PI * frequency * t));
+    }
+
+    const trace = {
+      x: x,
+      y: y,
+      mode: 'lines',
+      type: 'scatter'
+    };
+
+    const layout = {
+      title: 'Sine Wave',
+      xaxis: {
+        title: 'Frequency (Hz)'
+      },
+      yaxis: {
+        title: 'Amplitude (mm)'
+      }
+    };
+
+    // Create the Plotly chart
+    Plotly.newPlot('sineWavePlot', [trace], layout);
+
+    // Customize the Plotly chart configuration
+    Plotly.update('sineWavePlot', {}, {
+      displayModeBar: false, // Remove the mode bar (zoom, pan, etc.)
+      displaylogo: false, // Remove the Plotly logo
+      responsive: true // Enable responsiveness
+    });
+
+    // Show the modal
+    const modal = document.getElementById('sineWaveModal');
+    modal.style.display = 'block';
+    const modeBar = document.querySelector('.plotly .modebar');
+    if (modeBar) {
+      modeBar.style.display = 'none';
+    }
+  }
+
+  function closeModal() {
+    // Close the modal
+    const modal = document.getElementById('sineWaveModal');
+    modal.style.display = 'none';
+  }
+</script>
+                <!--
+                <div class="var-div">
+                  <label for="lengthSpinner">Length (mm)</label>
+                  <input class="var-spinner" id="lengthSpinner" name="value" />
+                  <div class="var-slider" id="lengthSlider"></div>
+                </div>
+                <div class="var-div">
+                  <label for="dampSpinner">Damping Ratio</label>
+                  <input class="var-spinner" id="dampSpinner" name="value" />
+                  <div class="var-slider" id="dampSlider"></div>
+                </div>
+                <div class="var-div">
+                  <label for="massSpinner">End Mass(kg)</label>
+                  <input class="var-spinner" id="massSpinner" name="value" />
+                  <div class="var-slider" id="massSlider"></div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+		  
+		  <div id="comments" class="main__task-div">
+            <h3 class="task-title">Controls</h3>
+              <div class="settings-sections">
+                <div class="control-sections">
+
+                 
+                <!--<label for="frequency">Frequency (Hz):</label>
+                <input style="width:30%;" type="number" id="frequency" value="1"><br>-->
+                <label for="frequency">Frequency:</label>
+              <input style="width:30%;" type="number" id="frequency" value=""><br>
+              <button style="width:30%;" onclick="generateSineWave()">Generate</button><br>
+                </div>
+              </div>
+          </div>
+
+          <div id="comments" class="main__task-div">
+            <div class="settings-sections">
+            <h3 class="task-title">Results</h3>
+            
+            </div>
+
+            <!--div modal for sin wave starts here-->
+
+            <div id="sineWaveModal" class="modal">
+              <div class="modal-content">
+                  <span class="close" onclick="closeModal()">&times;</span>
+                  <div id="sineWavePlot"></div>
+              </div>
+            </div>
+            <!--div modal for sin wave ends here-->
+
+              <div class="settings-sections">
+                <div class="control-sections">
+
+                  
+                  
+                  
+                  <script src="script.js"></script>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="main__task-div footer">
+            <p>Copyright © SOLVE The Virtual Lab @ NITK Surathkal</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
